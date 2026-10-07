@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ReconX | Enterprise Financial Reconciliation & Exception Management</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+
+  <div id="app-layout">
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="brand-header">
+        <div class="brand-logo">R</div>
+        <span class="brand-title">LOru</span>
+        <span class="brand-badge">FINTECH</span>
+      </div>
+
+      <nav class="nav-menu">
+        <a class="nav-item active" data-view="dashboard">
+          <i class="fa-solid fa-chart-pie"></i>
+          <span>Dashboard</span>
+        </a>
+        <a class="nav-item" data-view="transactions">
+          <i class="fa-solid fa-list-check"></i>
+          <span>Transactions</span>
+        </a>
+        <a class="nav-item" data-view="ingestion">
+          <i class="fa-solid fa-file-arrow-up"></i>
+          <span>Data Ingestion</span>
+        </a>
+        <a class="nav-item" data-view="reconciliation">
+          <i class="fa-solid fa-code-compare"></i>
+          <span>Reconciliation</span>
+        </a>
+        <a class="nav-item" data-view="exceptions">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <span>Exceptions</span>
+          <span class="nav-badge" id="sidebar-open-exc-count">0</span>
+        </a>
+        <a class="nav-item" data-view="rules">
+          <i class="fa-solid fa-sliders"></i>
+          <span>Match Rules</span>
+        </a>
+        <a class="nav-item" data-view="reports">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Reports</span>
+        </a>
+        <a class="nav-item" data-view="audit">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>Audit Logs</span>
+        </a>
+        <a class="nav-item" data-view="users">
+          <i class="fa-solid fa-users"></i>
+          <span>User & Roles</span>
+        </a>
+        <a class="nav-item" data-view="settings">
+          <i class="fa-solid fa-gear"></i>
+          <span>Settings</span>
+        </a>
+      </nav>
+
+      <div style="padding: 16px; border-top: 1px solid var(--border-color);">
+        <button class="btn btn-secondary" style="width: 100%; justify-content: center;" id="btn-logout">
+          <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-wrapper">
+
+      <!-- Topbar Header -->
+      <header class="topbar">
+        <div class="topbar-search">
+          <i class="fa-solid fa-magnifying-glass" style="color: var(--text-dim);"></i>
+          <input type="text" id="global-search-input" placeholder="Search Txn ID, Reference, UTR, Amount...">
+        </div>
+
+        <div class="topbar-actions">
+          <button class="btn-icon" id="theme-toggle" title="Toggle Dark/Light Mode">
+            <i class="fa-solid fa-moon"></i>
+          </button>
+
+          <button class="btn-icon" id="notif-bell" title="Notifications">
+            <i class="fa-regular fa-bell"></i>
+            <span class="icon-badge" id="notif-badge" style="display: none;"></span>
+          </button>
+
+          <!-- User Role & Profile -->
+          <div class="user-profile-menu">
+            <div class="avatar" id="user-avatar-initials">AW</div>
+            <div class="user-info">
+              <span class="user-name" id="topbar-user-fullname">Alexander Wright</span>
+              <span class="user-role-pill" id="topbar-user-role">SUPER ADMIN</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Dynamic Page View Container -->
+      <section class="page-container" id="view-content">
+        <!-- Views loaded dynamically by SPA router -->
+      </section>
+    </main>
+
+  </div>
+
+  <!-- Reusable Modal Container -->
+  <div class="modal-overlay" id="app-modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="modal-title">Modal Title</h3>
+        <button class="btn-icon" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body" id="modal-body-content">
+        <!-- Content injected here -->
+      </div>
+      <div class="modal-footer" id="modal-footer-actions">
+        <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <!-- Import Map for Firebase (ES Modules) -->
+  <script type="importmap">
+    {
+      "imports": {
+        "firebase/app": "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js",
+        "firebase/auth": "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js",
+        "firebase/firestore": "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js"
+      }
+    }
+  </script>
+
+  <!-- Scripts -->
+  <script type="module" src="/js/firebase.js"></script>
+  <script type="module" src="/js/auth.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/views/dashboard.js"></script>
+  <script src="/js/views/transactions.js"></script>
+  <script src="/js/views/ingestion.js"></script>
+  <script src="/js/views/reconciliation.js"></script>
+  <script src="/js/views/exceptions.js"></script>
+  <script src="/js/views/rules.js"></script>
+  <script src="/js/views/reports.js"></script>
+  <script src="/js/views/audit.js"></script>
+  <script src="/js/views/users.js"></script>
+  <script src="/js/views/settings.js"></script>
+
+</body>
+
+</html>
